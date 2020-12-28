@@ -83,7 +83,7 @@ function Navbar(props) {
 
         <Flex className="nav-menu">
           <Box>
-            <Link as={ChakraLink} to="#home" color="gray.300" fontSize={22}>
+            <Link as={ChakraLink} to="/" color="gray.300" fontSize={22}>
               Início
             </Link>
           </Box>
@@ -95,7 +95,7 @@ function Navbar(props) {
           </Box>
 
           <Box ml={7}>
-            <Link as={ChakraLink} to="#perfil" color="gray.300" fontSize={22}>
+            <Link as={ChakraLink} to="/profile" color="gray.300" fontSize={22}>
               Perfil
             </Link>
           </Box>

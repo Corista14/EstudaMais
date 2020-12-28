@@ -41,7 +41,7 @@ export const RigthNavbarItems = [
   },
   {
     title: "Perfil",
-    url: "#",
+    url: "/profile",
     cName: "nav-links"
   }
 ];

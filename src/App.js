@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
+import Profile from "./components/Profile/Profile";
 import SignUp from "./components/SignUp/SignUp";
 import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoute from "./routes/PrivateRoute";
@@ -13,6 +14,7 @@ function App() {
       <AuthProvider>
         <Switch>
           <PrivateRoute exact path="/add-resource" component={Dashboard} />
+          <PrivateRoute path="/profile" component={Profile} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={SignUp} />
           <Route path="/" component={Home} />

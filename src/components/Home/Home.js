@@ -129,6 +129,7 @@ function Home() {
             </Box>
           </Flex>
         </Flex>
+
       </section>
     </div>
   );
