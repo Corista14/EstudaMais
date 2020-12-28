@@ -13,9 +13,11 @@ import {
   AlertIcon,
   Text,
   useToast,
+  useColorMode,
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import logo from "../../images/logo.svg";
+import lightLogo from "../../images/light-logo.svg";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -24,6 +26,7 @@ function Login() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const { colorMode } = useColorMode();
 
   const toast = useToast();
 
@@ -62,7 +65,11 @@ function Login() {
     <Flex width="full" mt={20} align="center" justifyContent="center">
       <Box p={4} width={500}>
         <Box textAlign="center" alignContent="center">
-          <img src={logo} style={{ margin: "auto" }} alt="Logo Estuda+" />
+          <img
+            src={colorMode === "dark" ? lightLogo : logo}
+            style={{ margin: "auto" }}
+            alt="Logo Estuda+"
+          />
         </Box>
         <Box mt={7} p={8} borderWidth={1} borderRadius={8} boxShadow="lg">
           <Heading textAlign="center">Entrar</Heading>

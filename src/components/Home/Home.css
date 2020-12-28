@@ -1,0 +1,126 @@
+.home-section {
+  max-height: 260vh !important;
+  min-height: 100vh;
+  padding-bottom: 100px;
+}
+
+.signup-section {
+  background-color: #36373d;
+  max-height: 400vh;
+  padding-bottom: 100px;
+  flex-wrap: nowrap !important;
+}
+
+@media screen and (max-device-width: 480px) {
+  .home-cards {
+    margin-left: 2rem !important;
+    margin-right: 2rem !important;
+  }
+  .home-section {
+    min-height: 200vh !important;
+
+  }
+  .rule-home {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+  .signup-section {
+    height: 100vh;
+    min-height: 110vh !important;
+    padding-bottom: 100px;
+  }
+  .signup-container {
+    padding: 10px !important;
+  }
+  .signup-image {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+  .signup-title2-section {
+    font-size: 20px !important;
+    margin-top: 1rem;
+  }
+  .signup-container2 {
+    margin-top: 0 !important;
+  }
+  .signup-title1-section {
+    font-size: 26px !important;
+    margin-top: 2rem;
+  }
+}
+
+.signup-image {
+  min-width: 350px;
+}
+
+/* ----------- iPhone X ----------- */
+
+/* Portrait */
+@media only screen and (device-width: 375px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) {
+  .home-section {
+    height: 210vh !important;
+  }
+  .signup-section {
+    height: 100vh !important;
+  }
+  .signup-image {
+    margin: 0;
+  }
+}
+
+/* 1792x828px at 326ppi IPHONE 11 */
+@media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
+  .home-section {
+    height: 190vh;
+  }
+  .signup-section {
+    height: 100vh;
+  }
+}
+
+
+/* ----------- iPhone 6+, 7+ and 8+ ----------- */
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 414px) 
+  and (max-device-width: 736px) 
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: portrait) { 
+    .home-section {
+      height: 230vh !important;
+    }
+    .signup-section {
+      height: 110vh !important;
+    }
+}
+
+
+/* ----------- Galaxy S6 ----------- */
+
+/* Portrait */
+@media screen 
+  and (device-width: 360px) 
+  and (device-height: 640px) 
+  and (-webkit-device-pixel-ratio: 4) 
+  and (orientation: portrait) {
+    .home-section {
+      height: 300vh !important;
+    }
+    .signup-section {
+      height: 200vh !important;
+    }
+}
+
+
+
+@media screen and (width: 500px) {
+  .signup-section {
+    justify-content: center;
+    align-items: center;
+  }
+  
+}
+
+
+/* ----------- iPhone 5, 5S, 5C and 5SE ----------- */

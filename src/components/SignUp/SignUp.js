@@ -14,9 +14,11 @@ import {
   Alert,
   AlertIcon,
   useToast,
+  useColorMode,
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import logo from "../../images/logo.svg";
+import lightLogo from "../../images/light-logo.svg";
 import Navbar from "../Navbar/Navbar";
 
 function SignUp() {
@@ -29,6 +31,7 @@ function SignUp() {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const toast = useToast();
+  const { colorMode } = useColorMode();
 
   function handlePasswordChange(e) {
     setPassword(e.target.value);
@@ -50,7 +53,7 @@ function SignUp() {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      return setError("Passwords doesn't match");
+      return setError("As palavras passes não correspondem");
     }
 
     try {
@@ -59,8 +62,8 @@ function SignUp() {
       await signup(email, password, username);
       history.push("/");
       toast({
-        title: "Account Created",
-        description: `Your account was created.`,
+        title: "Conta criada",
+        description: `Conta criada com sucesso.`,
         status: "success",
         duration: 7000,
         isClosable: true,
@@ -83,7 +86,11 @@ function SignUp() {
       >
         <Box p={4} width={500}>
           <Box textAlign="center" alignContent="center">
-            <img src={logo} style={{ margin: "auto" }} alt="Logo Estuda+" />
+            <img
+              src={colorMode === "dark" ? lightLogo : logo}
+              style={{ margin: "auto" }}
+              alt="Logo Estuda+"
+            />
           </Box>
           <Box mt={7} p={8} borderWidth={1} borderRadius={8} boxShadow="lg">
             <Heading textAlign="center">Registar</Heading>
