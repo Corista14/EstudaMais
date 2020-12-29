@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Box,
   Flex,
@@ -6,7 +6,6 @@ import {
   Text,
   Heading,
   Img,
-  Divider,
 } from "@chakra-ui/react";
 import Navbar from "../Navbar/Navbar";
 import { useAuth } from "../../contexts/AuthContext";
@@ -21,25 +20,6 @@ import "./Home.css";
 import { Link } from 'react-router-dom'
 
 function Home() {
-  const { currentUser } = useAuth();
-  const db = firebase.firestore();
-  const [username, setUsername] = useState();
-
-  const retrieveUsername = () => {
-    db.collection("users")
-      .doc(currentUser.uid)
-      .get()
-      .then((doc) => {
-        return setUsername(doc.data().username);
-      });
-  };
-
-  useEffect(() => {
-    if (currentUser) {
-      retrieveUsername();
-    }
-    return;
-  }, []);
 
   return (
     <div>
@@ -78,7 +58,7 @@ function Home() {
       <section className="signup-section">
         <Flex
           wrap="wrap"
-          p={16}
+          p={120}
           justifyContent="space-around"
           alignItems="center"
           className="signup-container"

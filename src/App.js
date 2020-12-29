@@ -13,11 +13,11 @@ function App() {
     <Router>
       <AuthProvider>
         <Switch>
-          <PrivateRoute exact path="/add-resource" component={Dashboard} />
+          <PrivateRoute path="/add-resource" component={Dashboard} />
           <PrivateRoute path="/profile" component={Profile} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={SignUp} />
-          <Route path="/" component={Home} />
+          <Route exact path="/" component={Home} />
         </Switch>
       </AuthProvider>
     </Router>

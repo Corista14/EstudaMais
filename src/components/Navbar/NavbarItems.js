@@ -3,9 +3,9 @@ export const MiddleNavbarItems = [
     title: "10º",
     url: "#",
     cName: "nav-links",
-    as1: 'MAT A (10ºano)',
-    as2: 'FQ A',
-    as3: 'BG'
+    as1: 'Matemática A (10ºano)',
+    as2: 'Física e Química A',
+    as3: 'Biologia e Geologia'
   },
   {
     title: "11º",
@@ -31,7 +31,7 @@ export const MiddleNavbarItems = [
 export const RigthNavbarItems = [
   {
     title: "Início",
-    url: "#",
+    url: "/",
     cName: "nav-links",
   },
   {
