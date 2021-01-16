@@ -1,0 +1,15 @@
+@media only screen and (max-width: 720px) {
+  .add-resource-button {
+    margin-top: 3rem;
+    padding-bottom: 10rem;
+  }
+  .profile-enter {
+    font-size: 24px !important;
+  }
+  .stats-profle {
+    font-size: 42px !important;
+  }
+  .title-stats {
+    font-size: 26px !important;
+  }
+}

@@ -17,12 +17,11 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  useMenuContext,
 } from "@chakra-ui/react";
 import logo from "../../images/light-logo.svg";
 import drawerImage from "../../images/drawer-image.svg";
 import { Link as ChakraLink } from "react-router-dom";
-import { HamburgerIcon, CloseIcon, SunIcon, MoonIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, CloseIcon, SunIcon, MoonIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import "./Navbar.css";
 import { MiddleNavbarItems, RigthNavbarItems } from "./NavbarItems";
 
@@ -66,14 +65,27 @@ function Navbar(props) {
                     to={item.url}
                     fontSize={22}
                   >
-                    {item.title}
+                    {item.title} <ChevronDownIcon />
                   </MenuButton>
                   <MenuList
                     color={colorMode === "dark" ? "whitesmoke" : "black"}
                   >
-                    <MenuItem>{item.as1}</MenuItem> {/*  Mat  */}
-                    <MenuItem>{item.as2}</MenuItem> {/*  FQ  */}
-                    <MenuItem>{item.as3}</MenuItem> {/*  BG  */}
+                    <ChakraLink to="/mat11">
+                      <MenuItem>{item.as1}</MenuItem> {/*  Mat  */}
+                    </ChakraLink>
+
+                    <ChakraLink to="/fq11">
+                      <MenuItem>{item.as2}</MenuItem> {/*  FQ  */}
+                    </ChakraLink>
+
+                    <ChakraLink to="/bg11">
+                      <MenuItem>{item.as3}</MenuItem> {/*  BG  */}
+                    </ChakraLink>
+
+                    <ChakraLink to="/pt11">
+                      <MenuItem>{item.as4}</MenuItem> {/*  PT  */}
+                    </ChakraLink>
+
                   </MenuList>
                 </Menu>
               </Flex>
@@ -84,19 +96,19 @@ function Navbar(props) {
         <Flex className="nav-menu">
           <Box>
             <Link as={ChakraLink} to="/" color="gray.300" fontSize={22}>
-              Início
+              Home
             </Link>
           </Box>
 
           <Box ml={7}>
             <Link as={ChakraLink} to="#about" color="gray.300" fontSize={22}>
-              Sobre
+              About
             </Link>
           </Box>
 
           <Box ml={7}>
             <Link as={ChakraLink} to="/profile" color="gray.300" fontSize={22}>
-              Perfil
+              Profile
             </Link>
           </Box>
         </Flex>
@@ -152,12 +164,32 @@ function Navbar(props) {
                             to={item.url}
                             fontSize={32}
                           >
-                            {item.title}
+                            {item.title} <ChevronDownIcon/>
                           </MenuButton>
                           <MenuList>
-                            <MenuItem>{item.as1}</MenuItem>
-                            <MenuItem>{item.as2}</MenuItem>
-                            <MenuItem>{item.as3}</MenuItem>
+                            <ChakraLink
+                              to="/mat11"
+                            >
+                              <MenuItem>{item.as1}</MenuItem>
+                            </ChakraLink>
+                            
+                            <ChakraLink
+                              to="/fq11"
+                            >
+                              <MenuItem>{item.as2}</MenuItem>
+                            </ChakraLink>
+
+                            <ChakraLink
+                              to="/bg11"
+                            >
+                              <MenuItem>{item.as3}</MenuItem>
+                            </ChakraLink>
+
+                            <ChakraLink
+                              to="/pt11"
+                            >
+                              <MenuItem>{item.as4}</MenuItem>
+                            </ChakraLink>
                           </MenuList>
                         </Menu>
                       </Flex>

@@ -4,13 +4,10 @@ import {
   Flex,
   Button,
   Text,
-  Heading,
   Img,
 } from "@chakra-ui/react";
 import Navbar from "../Navbar/Navbar";
-import { useAuth } from "../../contexts/AuthContext";
 import "firebase/firestore";
-import firebase from "firebase/app";
 import Card from "../Card/Card";
 import studyingHome from "../../images/studying-home.svg";
 import shareHome from "../../images/share-home.svg";
@@ -25,9 +22,9 @@ function Home() {
     <div>
       <Navbar />
       <section className="home-section">
-        <Heading textAlign="center" mt={20}>
-          Bem-Vindo!
-        </Heading>
+        <Text fontSize={32} fontWeight="bold" textAlign="center" mt={12}>
+          Welcome!
+        </Text>
 
         <Flex
           wrap="wrap"
@@ -36,20 +33,17 @@ function Home() {
           className="home-cards"
           mt={6}
         >
-          <Card image={studyingHome} title="Estuda." bgColor="white" />
-          <Card image={shareHome} title="Partilha." bgColor="white" />
-          <Card image={enjoyHome} title="Aproveita." bgColor="white" />
+          <Card image={studyingHome} title="Study" bgColor="white" />
+          <Card image={shareHome} title="Share" bgColor="white" />
+          <Card image={enjoyHome} title="Enjoy" bgColor="white" />
         </Flex>
         <Box mt={20} className="rule-home">
           <Text textAlign="center">
-            Lembra-te sempre de respeitar as regras de partilha de recursos.
-          </Text>
-          <Text textAlign="center">
-            Só assim o site poderá continuar a funcionar.
+            Allways remember to respect the website rules.
           </Text>
           <Box textAlign="center" mt={10}>
             <Button colorScheme="blue" size="lg">
-              Ver Regras
+              See Rules
             </Button>
           </Box>
         </Box>
@@ -70,7 +64,7 @@ function Home() {
             textAlign="center"
             fontSize={32}
           >
-            Ainda não tens uma conta?
+            Need an account?
           </Text>
           <Flex
             justifyContent="center"
@@ -90,7 +84,7 @@ function Home() {
                 fontSize={32}
                 color="whitesmoke"
               >
-                Para poderes partilhar recursos tens que ter uma conta criada.
+                In order to share resources you need to own an account.
               </Text>
               <Text
                 textAlign="center"
@@ -99,11 +93,11 @@ function Home() {
                 fontSize={22}
                 color="whitesmoke"
               >
-                Do que estás à espera?
+                What are you waiting for?
               </Text>
               <Box textAlign="center" mt={7}>
                 <Button size="lg" colorScheme="blue" as={Link} to="/signup">
-                  Regista-te
+                  Register
                 </Button>
               </Box>
             </Box>

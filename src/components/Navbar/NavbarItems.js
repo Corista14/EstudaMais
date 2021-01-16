@@ -1,27 +1,11 @@
 export const MiddleNavbarItems = [
   {
-    title: "10º",
-    url: "#",
+    title: "Disciplinas",
     cName: "nav-links",
-    as1: 'Matemática A (10ºano)',
-    as2: 'Física e Química A',
-    as3: 'Biologia e Geologia'
-  },
-  {
-    title: "11º",
-    url: "#",
-    cName: "nav-links",
-    as1: 'Matemática A (11ºano)',
-    as2: 'Física e Química A (11ºano)',
-    as3: 'Biologia e Geologia (11ºano)'
-  },
-  {
-    title: "12º",
-    url: "#",
-    cName: "nav-links",
-    as1: 'Matemática A (12ºano)',
-    as2: 'Física A (12ºano)',
-    as3: 'Biologia (12ºano)'
+    as1: 'Matemática A (11º ano)',
+    as2: 'Física e Química A (11º ano)',
+    as3: 'Biologia e Geologia (11º ano)',
+    as4: 'Português (11º ano)',
   },
 ];
 
@@ -30,17 +14,17 @@ export const MiddleNavbarItems = [
 
 export const RigthNavbarItems = [
   {
-    title: "Início",
+    title: "Home",
     url: "/",
     cName: "nav-links",
   },
   {
-    title: "Sobre",
+    title: "About",
     url: "#",
     cName: "nav-links",
   },
   {
-    title: "Perfil",
+    title: "Profile",
     url: "/profile",
     cName: "nav-links"
   }

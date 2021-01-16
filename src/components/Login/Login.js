@@ -22,7 +22,7 @@ import lightLogo from "../../images/light-logo.svg";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login, currentUser, logout } = useAuth();
+  const { login, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -47,15 +47,15 @@ function Login() {
       await login(email, password);
       history.push("/");
       toast({
-        title: "Login feito com sucesso",
-        description: `Entraste com a tua conta associada ao email ${currentUser.email}.`,
+        title: "Login done with success",
+        description: `You are succecefuly logged in with the email: ${currentUser.email}.`,
         isClosable: true,
         status: "success",
         duration: 5000,
       });
     } catch (error) {
       setError(
-        "Erro ao entrar. A palavra passe ou o email podem estar incorretos."
+        "Error. The password or email might be wrong."
       );
     }
 
@@ -72,7 +72,7 @@ function Login() {
           />
         </Box>
         <Box mt={7} p={8} borderWidth={1} borderRadius={8} boxShadow="lg">
-          <Heading textAlign="center">Entrar</Heading>
+          <Heading textAlign="center">Login</Heading>
           {error && (
             <Alert borderRadius={10} mt={4} status="error">
               <AlertIcon />
@@ -82,7 +82,7 @@ function Login() {
           <form onSubmit={handleSubmit}>
             <Box mt={2} textAlign="center">
               <Link style={{ color: "teal", fontSize: 14 }} to="/">
-                Voltar ao Início
+                Back to Home
               </Link>
             </Box>
             <FormControl mt={4}>
@@ -92,18 +92,18 @@ function Login() {
                 onChange={handleEmailChange}
                 type="email"
                 required
-                placeholder="nome@exemplo.com"
+                placeholder="name@example.com"
               />
             </FormControl>
 
             <FormControl mt={6}>
-              <FormLabel>Palavra-Passe</FormLabel>
+              <FormLabel>Password</FormLabel>
               <Input
                 value={password}
                 onChange={handlePasswordChange}
                 type="password"
                 required
-                placeholder="Palavra-Passe..."
+                placeholder="Password..."
               />
             </FormControl>
 
@@ -115,14 +115,14 @@ function Login() {
               rightIcon={<ArrowForwardIcon />}
               type="submit"
             >
-              Entrar
+              Login
             </Button>
           </form>
           <Box textAlign="center" mt={5}>
             <Text>
-              Ainda não tens um conta?{" "}
+              Dont have an account?{" "}
               <Link style={{ color: "teal" }} to="/signup">
-                Regista-te!
+                Register!
               </Link>
             </Text>
           </Box>

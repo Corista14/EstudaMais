@@ -21,7 +21,7 @@ function Card({ title, image, bgColor, ml, mr }) {
         <Text fontSize={36} fontWeight="bold">{title}</Text>
       </Box>
 
-      <Img src={image} mt={4} alt="Studying" />
+      <Img src={image} mt={7} alt="Studying" />
     </Box>
   );
 }

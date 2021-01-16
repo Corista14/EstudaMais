@@ -19,14 +19,13 @@ import {
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import logo from "../../images/logo.svg";
 import lightLogo from "../../images/light-logo.svg";
-import Navbar from "../Navbar/Navbar";
 
 function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const { signup, currentUser } = useAuth();
+  const { signup } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -62,8 +61,8 @@ function SignUp() {
       await signup(email, password, username);
       history.push("/");
       toast({
-        title: "Conta criada",
-        description: `Conta criada com sucesso.`,
+        title: "Account Created.",
+        description: `Account created succecefuly.`,
         status: "success",
         duration: 7000,
         isClosable: true,
@@ -93,7 +92,7 @@ function SignUp() {
             />
           </Box>
           <Box mt={7} p={8} borderWidth={1} borderRadius={8} boxShadow="lg">
-            <Heading textAlign="center">Registar</Heading>
+            <Heading textAlign="center">Register</Heading>
             {error && (
               <Alert borderRadius={10} mt={4} status="error">
                 <AlertIcon /> {error}
@@ -118,29 +117,29 @@ function SignUp() {
                   onChange={handleEmailChange}
                   type="email"
                   required
-                  placeholder="nome@exemplo.com"
+                  placeholder="name@example.com"
                 />
               </FormControl>
 
               <FormControl mt={6}>
-                <FormLabel>Palavra-Passe</FormLabel>
+                <FormLabel>Password</FormLabel>
                 <Input
                   value={password}
                   onChange={handlePasswordChange}
                   type="password"
                   required
-                  placeholder="Palavra-Passe..."
+                  placeholder="Password..."
                 />
               </FormControl>
 
               <FormControl mt={6}>
-                <FormLabel>Confirmar Palavra-Passe</FormLabel>
+                <FormLabel>Confirm Password</FormLabel>
                 <Input
                   value={confirmPassword}
                   onChange={handleConfirmPasswordChange}
                   type="password"
                   required
-                  placeholder="Confirma a tua Palavra-Passe"
+                  placeholder="Confirm your password..."
                 />
               </FormControl>
 
@@ -152,19 +151,19 @@ function SignUp() {
                 type="submit"
                 colorScheme="teal"
               >
-                Registar
+                Register
               </Button>
             </form>
             <Box textAlign="center" mt={4}>
               <Text>
-                Já tens uma conta?{" "}
+                Already have an account?{" "}
                 <Link style={{ color: "teal" }} to="/login">
-                  Entrar
+                  Login
                 </Link>
               </Text>
               <Box mt={4}>
                 <Link style={{ color: "teal" }} to="/">
-                  Voltar ao Início
+                  Back to Home.
                 </Link>
               </Box>
             </Box>

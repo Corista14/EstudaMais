@@ -2,16 +2,50 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import firebase from "firebase/app";
 import "firebase/firestore";
+import "firebase/storage";
 import Navbar from "../Navbar/Navbar";
-import { Flex, Box, Text, Badge, Progress } from "@chakra-ui/react";
-
+import {
+  Flex,
+  Box,
+  Text,
+  Badge,
+  Progress,
+  Button,
+  useDisclosure,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalCloseButton,
+  ModalHeader,
+  ModalOverlay,
+  FormControl,
+  Input,
+  FormLabel,
+  Select,
+  Divider,
+  useToast,
+} from "@chakra-ui/react";
+import "./Profile.css";
 
 function Profile() {
+  const [file, setFile] = useState();
+  const [yearOption, setYearOption] = useState("");
+  const [subjectOption, setSubjectOption] = useState("");
+  const [resourceName, setResourceName] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [userResourcesCount, setUserResourcesCount] = useState(0);
   const { currentUser } = useAuth();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [username, setUsername] = useState("");
+  const [currentResourceCount, setCurrentResourceCount] = useState(0);
+  const toast = useToast();
+  const storageRef = firebase.storage().ref();
   const db = firebase.firestore();
-  const creationDate = new Date(currentUser.metadata.creationTime).toLocaleDateString('en-GB')
-  
+
+  const creationDate = new Date(
+    currentUser.metadata.creationTime
+  ).toLocaleDateString("en-GB");
+
   const retrieveUsername = () => {
     db.collection("users")
       .doc(currentUser.uid)
@@ -21,19 +55,88 @@ function Profile() {
       });
   };
 
+  const handleResourceNameChange = (e) => setResourceName(e.target.value);
+
+
+  const handleFileChange = (e) => {
+    const newFile = e.target.files[0];
+    setFile(newFile);
+  };
+
+  const handleYearOption = (e) => {
+    return setYearOption(e.target.value);
+  };
+
+  const handleSubjectOption = (e) => {
+    return setSubjectOption(e.target.value);
+  };
+
+  const sendFileToStorageAndGetURL = async () => {
+    const fileRef = storageRef.child(file.name);
+    await fileRef.put(file);
+
+    fileRef.getDownloadURL().then((url) => {
+      db.collection("resource")
+        .doc()
+        .set({
+          name: resourceName,
+          year: yearOption,
+          subject: subjectOption,
+          url: url,
+          author: username,
+        })
+        .catch((e) => console.log(e.message));
+    });
+
+  };
+
+  const handleResourceSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      await sendFileToStorageAndGetURL();
+      await db.collection("users").doc(currentUser.uid).update({
+        userResourcesCount: userResourcesCount,
+      });
+      toast({
+        title: "Resource Added",
+        description: `${resourceName} was added succecefuly. Thanks for your contribution.`,
+        status: "success",
+        isClosable: true,
+        duration: 6000,
+      });
+      setLoading(false);
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: `It wasn´t possible to add this resource. Try again later.`,
+        status: "error",
+        isClosable: true,
+        duration: 6000,
+      });
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
+    if (yearOption === "") setYearOption("10º");
+    if (subjectOption === "") setSubjectOption("Matemática A");
     retrieveUsername();
+    // eslint-disable-next-line
   }, []);
 
   return (
     <div>
       <Navbar />
+
+      {/* USERNAME AND LVL DISPLAY */}
       <Flex justifyContent="center" wrap="wrap" alignItems="center">
         <Box mt={10}>
-          <Text fontSize={36}>
-            Olá, {username}
+          <Text className="profile-enter" fontSize={36}>
+            Hello, {username}
             <Badge fontSize="1rem" ml={4} colorScheme="teal">
-              Nível 3
+              Level 3
             </Badge>
           </Text>
           <Progress
@@ -46,26 +149,123 @@ function Profile() {
             max={100}
           />
           <Flex mt={2} justifyContent="space-between">
-            <Text>Nível 3</Text>
-            <Text>Nível 4</Text>
+            <Text>Level 3</Text>
+            <Text>Level 4</Text>
           </Flex>
         </Box>
       </Flex>
 
-      <Flex mb={10} wrap="wrap" justifyContent="space-around" mt={100}>
-        <Box textAlign="center" mt={10}>
-          <Text fontSize="2rem">Recursos Partilhados</Text>
-          <Text fontSize="3rem" color="teal.400">
-            23
+      {/* ACCOUNT STATS */}
+
+      <Flex mb={10} wrap="wrap" justifyContent="space-around">
+        <Box textAlign="center" mt={20}>
+          <Text className="title-stats" fontSize="2rem">Resources Shared</Text>
+          <Text className="stats-profle" fontSize="3rem" color="teal.400">
+            {currentResourceCount}
           </Text>
         </Box>
         <Box textAlign="center" mt={10}>
-          <Text fontSize="2rem">Data de criação</Text>
-          <Text fontSize="3rem" color="purple.400">
+          <Text className="title-stats" fontSize="2rem">Criation Date</Text>
+          <Text className="stats-profle" fontSize="3rem" color="purple.400">
             {creationDate}
           </Text>
         </Box>
       </Flex>
+
+      {/* ADD RESOURCE SECTION */}
+      <Box textAlign="center" className="add-resource-button">
+        <Button onClick={onOpen} colorScheme="teal" mt={10}>
+          Add Resource
+        </Button>
+        <Box className="modal-profile">
+          <Modal size="sm" isCentered="true" isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>
+                Add Resource
+                <ModalCloseButton />
+              </ModalHeader>
+              <Divider />
+              <ModalBody pb={10}>
+                <form onSubmit={handleResourceSubmit}>
+                  <FormControl mt={5}>
+                    <FormLabel>Resource Name</FormLabel>
+                    <Input
+                      required
+                      value={resourceName}
+                      onChange={handleResourceNameChange}
+                      placeholder="ex: Exercícios de Mecânica"
+                    />
+                  </FormControl>
+
+                  <FormControl mt={5}>
+                    <FormLabel>Select Grade</FormLabel>
+                    <Select
+                      value={yearOption}
+                      onChange={handleYearOption}
+                      required
+                    >
+                      <option value="10º">10º</option>
+                      <option value="11º">11º</option>
+                      <option value="12º">12º</option>
+                    </Select>
+                  </FormControl>
+
+                  <FormControl mt={5}>
+                    <FormLabel>Select the Subject</FormLabel>
+                    <Select
+                      required
+                      value={subjectOption}
+                      onChange={handleSubjectOption}
+                    >
+                      <option value="Matemática A">Matemática A</option>
+                      <option value="Física e Químcia A">
+                        Física e Química A
+                      </option>
+                      <option value="Biologia">Biologia</option>
+                      <option value="Português">Português</option>
+                    </Select>
+                  </FormControl>
+
+                  <FormControl mt={5}>
+                    <FormLabel>Seleciona the File</FormLabel>
+                    <Input
+                      display="none"
+                      type="file"
+                      id="contained-button-file"
+                      onChange={handleFileChange}
+                    />
+                    <label htmlFor="contained-button-file">
+                      <Button width="full" as="span" variant="outline">
+                        Select
+                      </Button>
+                    </label>
+                  </FormControl>
+
+                  <Box mt={10} textAlign="end">
+                    <Button
+                      type="submit"
+                      colorScheme="green"
+                      mr={5}
+                      isLoading={loading ? true : false}
+                      loadingText="Adding..."
+                    >
+                      Add
+                    </Button>
+                    <Button
+                      colorScheme="red"
+                      variant="outline"
+                      onClick={onClose}
+                    >
+                      Cancel
+                    </Button>
+                  </Box>
+                </form>
+              </ModalBody>
+            </ModalContent>
+          </Modal>
+        </Box>
+      </Box>
     </div>
   );
 }

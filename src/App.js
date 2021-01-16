@@ -5,6 +5,11 @@ import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile";
 import SignUp from "./components/SignUp/SignUp";
+import Subject from "./components/Subjects/Subject";
+import Bg11 from "./components/Subjects/_11/Bg11";
+import Fq11 from "./components/Subjects/_11/Fq11";
+import Mat11 from "./components/Subjects/_11/Mat11";
+import Pt11 from "./components/Subjects/_11/Pt11";
 import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoute from "./routes/PrivateRoute";
 
@@ -17,6 +22,10 @@ function App() {
           <PrivateRoute path="/profile" component={Profile} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={SignUp} />
+          <Route path="/mat11" component={Mat11} />
+          <Route path="/bg11" component={Bg11} />
+          <Route path="/fq11" component={Fq11} />
+          <Route path="/pt11" component={Pt11} />
           <Route exact path="/" component={Home} />
         </Switch>
       </AuthProvider>
