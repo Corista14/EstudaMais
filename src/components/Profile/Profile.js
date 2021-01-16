@@ -57,7 +57,6 @@ function Profile() {
 
   const handleResourceNameChange = (e) => setResourceName(e.target.value);
 
-
   const handleFileChange = (e) => {
     const newFile = e.target.files[0];
     setFile(newFile);
@@ -87,7 +86,6 @@ function Profile() {
         })
         .catch((e) => console.log(e.message));
     });
-
   };
 
   const handleResourceSubmit = async (e) => {
@@ -159,13 +157,17 @@ function Profile() {
 
       <Flex mb={10} wrap="wrap" justifyContent="space-around">
         <Box textAlign="center" mt={20}>
-          <Text className="title-stats" fontSize="2rem">Resources Shared</Text>
+          <Text className="title-stats" fontSize="2rem">
+            Resources Shared
+          </Text>
           <Text className="stats-profle" fontSize="3rem" color="teal.400">
             {currentResourceCount}
           </Text>
         </Box>
         <Box textAlign="center" mt={10}>
-          <Text className="title-stats" fontSize="2rem">Criation Date</Text>
+          <Text className="title-stats" fontSize="2rem">
+            Criation Date
+          </Text>
           <Text className="stats-profle" fontSize="3rem" color="purple.400">
             {creationDate}
           </Text>
