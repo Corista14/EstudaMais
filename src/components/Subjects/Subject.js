@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from "react";
 import ResourceCard from "../ResourceCard/ResourceCard";
-import { Flex, Text, Box, Alert, AlertIcon } from "@chakra-ui/react";
+import {
+  Flex,
+  Text,
+  Box,
+  Alert,
+  AlertIcon,
+  Input,
+  Button,
+  IconButton,
+} from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
 import Navbar from "../Navbar/Navbar";
 import "firebase/firestore";
 import firebase from "firebase/app";
@@ -8,6 +18,7 @@ import firebase from "firebase/app";
 function Subject({ year, subject }) {
   const db = firebase.firestore();
   const [resourceYear, setResourceYear] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const preformQuery1 = async () => {
@@ -22,35 +33,61 @@ function Subject({ year, subject }) {
       }
     };
     preformQuery1();
-
   }, []);
 
   return (
     <div>
       <Navbar />
-      <Text mt={10} fontSize={36} textAlign="center">
+      <Text mt={10} fontSize={32} textAlign="center">
         {subject} - {year} ano
       </Text>
+
+      <Flex alignItems="center" justifyContent="center" mt={12}>
+        <Box maxW={350}>
+          <Input
+            borderRightRadius={0}
+            placeholder="Search Resource name"
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+          />
+        </Box>
+        <IconButton borderLeftRadius={0} icon={<SearchIcon />} />
+      </Flex>
       <Flex alignItems="center" justifyContent="space-around" wrap="wrap">
         {resourceYear.length === 0 ? (
           <Box mt={10}>
-            <Alert status="warning" textAlign="center" borderRadius={5} size="lg">
+            <Alert
+              status="warning"
+              textAlign="center"
+              borderRadius={5}
+              size="lg"
+            >
               <AlertIcon />
               Ainda sem recursos aqui.
             </Alert>
           </Box>
         ) : (
-          resourceYear.map((item, index) => {
-            return (
-              <Box key={index}>
-                <ResourceCard
-                  author={item.author}
-                  resourceName={item.name}
-                  resourceURL={item.url}
-                />
-              </Box>
-            );
-          })
+          resourceYear
+            .filter((val) => {
+              if (search === "") return val;
+              else if (
+                val.name.toLowerCase().includes(search.toLocaleLowerCase())
+              ) {
+                return val;
+              }
+            })
+            .map((item, index) => {
+              return (
+                <Box key={index}>
+                  <ResourceCard
+                    author={item.author}
+                    resourceName={item.name}
+                    resourceURL={item.url}
+                  />
+                </Box>
+              );
+            })
         )}
       </Flex>
     </div>

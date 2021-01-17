@@ -6,17 +6,19 @@ function ResourceCard({ resourceName, author, resourceURL }) {
   return (
     <Box
       borderRadius={7}
-      mt={20}
-      w={350}
+      mt={16}
+      w={300}
       borderWidth={1}
       boxShadow="2xl"
-      padding={10}
+      padding={7}
       mb={10}
+      mr={12}
+      ml={12}
     >
-      <Text color="blue.500" fontSize={32} fontWeight="bold" textAlign="center">
+      <Text color="blue.500" fontSize={28} fontWeight="bold" textAlign="center">
         {author}
       </Text>
-      <Text mt={7} fontSize={24} textAlign="center">
+      <Text mt={7} fontSize={22} textAlign="center">
         {resourceName}
       </Text>
       <Box textAlign="center" mt={7}>
