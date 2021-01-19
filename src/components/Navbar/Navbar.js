@@ -101,7 +101,7 @@ function Navbar(props) {
           </Box>
 
           <Box ml={7}>
-            <Link as={ChakraLink} to="#about" color="gray.300" fontSize={22}>
+            <Link as={ChakraLink} to="/about" color="gray.300" fontSize={22}>
               About
             </Link>
           </Box>

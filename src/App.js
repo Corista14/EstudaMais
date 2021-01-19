@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import About from "./components/About/About";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile";
 import SignUp from "./components/SignUp/SignUp";
-import Subject from "./components/Subjects/Subject";
 import Bg11 from "./components/Subjects/_11/Bg11";
 import Fq11 from "./components/Subjects/_11/Fq11";
 import Mat11 from "./components/Subjects/_11/Mat11";
@@ -27,6 +27,7 @@ function App() {
           <Route path="/fq11" component={Fq11} />
           <Route path="/pt11" component={Pt11} />
           <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
         </Switch>
       </AuthProvider>
     </Router>

@@ -42,9 +42,9 @@ function Home() {
             Allways remember to respect the website rules.
           </Text>
           <Box textAlign="center" mt={10}>
-            <Button colorScheme="blue" size="lg">
+            <Link to="/about"><Button colorScheme="blue" size="lg">
               See Rules
-            </Button>
+            </Button></Link> 
           </Box>
         </Box>
       </section>

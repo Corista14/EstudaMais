@@ -33,11 +33,11 @@ function Profile() {
   const [subjectOption, setSubjectOption] = useState("");
   const [resourceName, setResourceName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [userResourcesCount, setUserResourcesCount] = useState(0);
   const { currentUser } = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [username, setUsername] = useState("");
-  const [currentResourceCount, setCurrentResourceCount] = useState(0);
+  const [currentResourceCount, setCurrentResourceCount] = useState([]);
+  const [dbResCount, setDbResCount] = useState(0);
   const toast = useToast();
   const storageRef = firebase.storage().ref();
   const db = firebase.firestore();
@@ -46,14 +46,13 @@ function Profile() {
     currentUser.metadata.creationTime
   ).toLocaleDateString("en-GB");
 
-  const retrieveUsername = () => {
-    db.collection("users")
-      .doc(currentUser.uid)
-      .get()
-      .then((doc) => {
-        return setUsername(doc.data().username);
-      });
+  const retrieveUsername = async () => {
+    const us = await db.collection("users").doc(currentUser.uid).get();
+    const name = us.data().username
+    return setUsername(name)
   };
+
+  
 
   const handleResourceNameChange = (e) => setResourceName(e.target.value);
 
@@ -88,13 +87,29 @@ function Profile() {
     });
   };
 
+  const retrieveUserResCount = async () => {
+    const data = await db.collection("users").doc(currentUser.uid).get();
+    return setDbResCount(data.data().userResourcesCount)
+  }
+  
+  const queryTotalResources = async () => {
+    console.log(username)
+    const query = await db
+      .collection("resource")
+      .where("author", "==", username).get();
+    for (const count of query.docs) {
+      const data = count.data()
+      setCurrentResourceCount((prevState) => prevState.concat(data));
+    }
+  };
+
   const handleResourceSubmit = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
       await sendFileToStorageAndGetURL();
       await db.collection("users").doc(currentUser.uid).update({
-        userResourcesCount: userResourcesCount,
+        userResourcesCount:  currentResourceCount.length + 1,
       });
       toast({
         title: "Resource Added",
@@ -120,9 +135,14 @@ function Profile() {
   useEffect(() => {
     if (yearOption === "") setYearOption("10º");
     if (subjectOption === "") setSubjectOption("Matemática A");
+
     retrieveUsername();
+    queryTotalResources();
+    retrieveUserResCount();
     // eslint-disable-next-line
-  }, []);
+  }, [username]);
+
+
 
   return (
     <div>
@@ -161,7 +181,7 @@ function Profile() {
             Resources Shared
           </Text>
           <Text className="stats-profle" fontSize="3rem" color="teal.400">
-            {currentResourceCount}
+            {dbResCount}
           </Text>
         </Box>
         <Box textAlign="center" mt={10}>
@@ -221,7 +241,7 @@ function Profile() {
                       onChange={handleSubjectOption}
                     >
                       <option value="Matemática A">Matemática A</option>
-                      <option value="Física e Químcia A">
+                      <option value="Física e Química A">
                         Física e Química A
                       </option>
                       <option value="Biologia">Biologia</option>

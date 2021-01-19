@@ -1,0 +1,101 @@
+.team-section {
+  height: 100vh;
+  background-color: #2c3964;
+}
+
+.about-section {
+  height: 100vh;
+}
+
+.rules-section {
+  height: 110vh;
+  background-color: #232c4b;
+}
+
+
+
+@media screen and (max-device-width: 480px) {
+  .about-section {
+    height: 105vh;
+  }
+  .about-title {
+    font-size: 24px !important;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-top: 1rem;
+  }
+  .about-image {
+    max-height: 350px !important;
+    max-width: 350px !important;
+  }
+  .about-desc {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-top: -2rem;
+  }
+  .rules-section {
+    height: 130vh;
+  }
+  .box-rules {
+    font-size: 18px !important;
+    margin-left: 2rem !important;
+    margin-right: 2rem !important;
+    max-height: 450px !important;
+    padding-bottom: 2rem !important;
+  }
+  .rules-image {
+    max-height: 250px !important;
+    margin-top: 0 !important;
+    max-width: 250px !important;
+  }
+  .rules-cont {
+    margin-top: 2rem !important;
+  }
+}
+
+.signup-image {
+  min-width: 350px;
+}
+
+/* ----------- iPhone X ----------- */
+
+/* Portrait */
+@media only screen and (device-width: 375px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) {
+  
+}
+
+/* 1792x828px at 326ppi IPHONE 11 */
+@media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
+  
+}
+
+
+/* ----------- iPhone 6+, 7+ and 8+ ----------- */
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 414px) 
+  and (max-device-width: 736px) 
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: portrait) { 
+    
+}
+
+
+/* ----------- Galaxy S6 ----------- */
+
+/* Portrait */
+@media screen 
+  and (device-width: 360px) 
+  and (device-height: 640px) 
+  and (-webkit-device-pixel-ratio: 4) 
+  and (orientation: portrait) {
+  
+}
+
+
+
+@media screen and (width: 500px) {
+
+  
+}
