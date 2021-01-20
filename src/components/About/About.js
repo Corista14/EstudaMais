@@ -7,7 +7,7 @@ import rulesImg from "../../images/rules.svg";
 
 function About() {
   return (
-    <div>
+    <div className="about">
       <Navbar />
       <section className="about-section">
         <Text textAlign="center" mt={12} fontSize={34}>
@@ -94,7 +94,7 @@ function About() {
       {/*TEAM SECTION*/}
       <section className="team-section">
         <Box
-          color="gray.300"
+          color="whitesmoke"
           top="50%"
           left="50%"
           position="relative"
