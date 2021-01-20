@@ -18,10 +18,17 @@ import {
   MenuItem,
   MenuList,
   Button,
+  Modal,
+  ModalBody,
+  ModalOverlay,
+  ModalContent,
+  ModalCloseButton,
+  ModalFooter,
+  ModalHeader
 } from "@chakra-ui/react";
 import logo from "../../images/light-logo.svg";
 import drawerImage from "../../images/drawer-image.svg";
-import { Link as ChakraLink } from "react-router-dom";
+import { Link as ChakraLink, useHistory } from "react-router-dom";
 import {
   HamburgerIcon,
   CloseIcon,
@@ -34,20 +41,26 @@ import "./Navbar.css";
 import { MiddleNavbarItems, RigthNavbarItems } from "./NavbarItems";
 import { useAuth } from "../../contexts/AuthContext";
 
+
 function Navbar(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
   const { currentUser, logout } = useAuth();
+  const history = useHistory()
 
   async function onClickLogout() {
     try {
       await logout();
+      history.push("/");
     } catch {
       console.log("Failed to logout.");
     }
   }
 
+
+
   return (
+    
     <Box boxShadow="2xl">
       <Flex
         boxShadow="lg"

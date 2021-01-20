@@ -1,11 +1,11 @@
 .rules-section {
   height: 110vh;
-  background-color: #161c27;
+  background-color: #161c27 !important;
 }
 
 .team-section {
   height: 100vh;
-  background-color: #10131b;
+  background-color: #10131b !important;
 }
 
 .about-section {
