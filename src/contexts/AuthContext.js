@@ -21,7 +21,8 @@ export function AuthProvider({ children }) {
         return db.collection("users").doc(creadentials.user.uid).set({
           username: username,
           email: email,
-          userResourcesCount: 0
+          userResourcesCount: 0,
+          level: 1
         });
       });
   }

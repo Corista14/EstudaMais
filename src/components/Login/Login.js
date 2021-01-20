@@ -109,7 +109,7 @@ function Login() {
 
             <Button
               width="full"
-              mt={4}
+              mt={6}
               disabled={loading}
               colorScheme="teal"
               rightIcon={<ArrowForwardIcon />}

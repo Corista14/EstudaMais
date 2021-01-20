@@ -17,17 +17,35 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Button,
 } from "@chakra-ui/react";
 import logo from "../../images/light-logo.svg";
 import drawerImage from "../../images/drawer-image.svg";
 import { Link as ChakraLink } from "react-router-dom";
-import { HamburgerIcon, CloseIcon, SunIcon, MoonIcon, ChevronDownIcon } from "@chakra-ui/icons";
+import {
+  HamburgerIcon,
+  CloseIcon,
+  SunIcon,
+  MoonIcon,
+  ChevronDownIcon,
+  LockIcon,
+} from "@chakra-ui/icons";
 import "./Navbar.css";
 import { MiddleNavbarItems, RigthNavbarItems } from "./NavbarItems";
+import { useAuth } from "../../contexts/AuthContext";
 
 function Navbar(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
+  const { currentUser, logout } = useAuth();
+
+  async function onClickLogout() {
+    try {
+      await logout();
+    } catch {
+      console.log("Failed to logout.");
+    }
+  }
 
   return (
     <Box boxShadow="2xl">
@@ -85,7 +103,6 @@ function Navbar(props) {
                     <ChakraLink to="/pt11">
                       <MenuItem>{item.as4}</MenuItem> {/*  PT  */}
                     </ChakraLink>
-
                   </MenuList>
                 </Menu>
               </Flex>
@@ -111,6 +128,18 @@ function Navbar(props) {
               Profile
             </Link>
           </Box>
+          {currentUser ? (
+            <Box textAlign="center" mt={0.2} ml={7}>
+              <Button
+                onClick={onClickLogout}
+                variant="outline"
+                colorScheme="black"
+                size="sm"
+              >
+                Logout
+              </Button>
+            </Box>
+          ) : null}
         </Flex>
 
         <IconButton
@@ -153,6 +182,16 @@ function Navbar(props) {
                     </Flex>
                   );
                 })}
+                <Box textAlign="center">
+                  <Button
+                    onClick={onClickLogout}
+                    variant="outline"
+                    colorScheme="black"
+                    size="sm"
+                  >
+                    Logout
+                  </Button>
+                </Box>
                 <Divider mt={2} />
                 <Flex mt={4} alignItems="center" justifyContent="center">
                   {MiddleNavbarItems.map((item, index) => {
@@ -164,30 +203,22 @@ function Navbar(props) {
                             to={item.url}
                             fontSize={32}
                           >
-                            {item.title} <ChevronDownIcon/>
+                            {item.title} <ChevronDownIcon />
                           </MenuButton>
                           <MenuList>
-                            <ChakraLink
-                              to="/mat11"
-                            >
+                            <ChakraLink to="/mat11">
                               <MenuItem>{item.as1}</MenuItem>
                             </ChakraLink>
-                            
-                            <ChakraLink
-                              to="/fq11"
-                            >
+
+                            <ChakraLink to="/fq11">
                               <MenuItem>{item.as2}</MenuItem>
                             </ChakraLink>
 
-                            <ChakraLink
-                              to="/bg11"
-                            >
+                            <ChakraLink to="/bg11">
                               <MenuItem>{item.as3}</MenuItem>
                             </ChakraLink>
 
-                            <ChakraLink
-                              to="/pt11"
-                            >
+                            <ChakraLink to="/pt11">
                               <MenuItem>{item.as4}</MenuItem>
                             </ChakraLink>
                           </MenuList>

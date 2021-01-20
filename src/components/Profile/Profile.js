@@ -38,6 +38,8 @@ function Profile() {
   const [username, setUsername] = useState("");
   const [currentResourceCount, setCurrentResourceCount] = useState([]);
   const [dbResCount, setDbResCount] = useState(0);
+  const [level, setLevel] = useState(1);
+  const [dbProgress, setDbProgress] = useState(0);
   const toast = useToast();
   const storageRef = firebase.storage().ref();
   const db = firebase.firestore();
@@ -52,7 +54,10 @@ function Profile() {
     return setUsername(name)
   };
 
-  
+  const defineLevel = async () => {
+    const user = await db.collection("users").doc(currentUser.uid).get();
+    return setLevel(user.data().level);
+  }
 
   const handleResourceNameChange = (e) => setResourceName(e.target.value);
 
@@ -87,13 +92,14 @@ function Profile() {
     });
   };
 
+  /**Function to get the actual user resources count. */
   const retrieveUserResCount = async () => {
     const data = await db.collection("users").doc(currentUser.uid).get();
     return setDbResCount(data.data().userResourcesCount)
   }
   
+  /**Function to query the user resources count. */
   const queryTotalResources = async () => {
-    console.log(username)
     const query = await db
       .collection("resource")
       .where("author", "==", username).get();
@@ -108,9 +114,13 @@ function Profile() {
     try {
       setLoading(true);
       await sendFileToStorageAndGetURL();
+      /**Update the user resource count. */
       await db.collection("users").doc(currentUser.uid).update({
-        userResourcesCount:  currentResourceCount.length + 1,
+        userResourcesCount: dbResCount + 1,
+        progress: dbProgress < 100 ? dbProgress + 10 : 0,
+        level: dbProgress >= 100 ? level + 1 : level
       });
+      
       toast({
         title: "Resource Added",
         description: `${resourceName} was added succecefuly. Thanks for your contribution.`,
@@ -139,8 +149,16 @@ function Profile() {
     retrieveUsername();
     queryTotalResources();
     retrieveUserResCount();
+    defineLevel();
+    getCurrentProgress();
     // eslint-disable-next-line
   }, [username]);
+
+  async function getCurrentProgress() {
+    const progressData = await db.collection("users").doc(currentUser.uid).get();
+    const progress = progressData.data().progress;
+    return setDbProgress(progress)
+  }
 
 
 
@@ -154,12 +172,13 @@ function Profile() {
           <Text className="profile-enter" fontSize={36}>
             Hello, {username}
             <Badge fontSize="1rem" ml={4} colorScheme="teal">
-              Level 3
+              Level {level}
             </Badge>
+            
           </Text>
           <Progress
             size="lg"
-            value={80}
+            value={dbProgress}
             borderRadius={7}
             colorScheme="teal"
             min={0}
@@ -167,8 +186,8 @@ function Profile() {
             max={100}
           />
           <Flex mt={2} justifyContent="space-between">
-            <Text>Level 3</Text>
-            <Text>Level 4</Text>
+            <Text>Level {level}</Text>
+            <Text>Level {level + 1}</Text>
           </Flex>
         </Box>
       </Flex>
@@ -193,6 +212,7 @@ function Profile() {
           </Text>
         </Box>
       </Flex>
+
 
       {/* ADD RESOURCE SECTION */}
       <Box textAlign="center" className="add-resource-button">
