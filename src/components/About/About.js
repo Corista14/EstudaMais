@@ -40,7 +40,7 @@ function About() {
               position="relative"
               transform="translate(-50%, -50%)"
             >
-              Made with the goal of sharing resources that might help while you are studying.
+              Made with the goal of sharing resources that may help while you are studying.
             </Text>
           </Box>
         </Flex>

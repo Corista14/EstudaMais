@@ -7,7 +7,7 @@ import {
   Alert,
   AlertIcon,
   Input,
-  Button,
+  Skeleton,
   IconButton,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
@@ -19,9 +19,11 @@ function Subject({ year, subject }) {
   const db = firebase.firestore();
   const [resourceYear, setResourceYear] = useState([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const preformQuery1 = async () => {
+      setLoading(true);
       const query = await db
         .collection("resource")
         .where("year", "==", year)
@@ -33,64 +35,67 @@ function Subject({ year, subject }) {
       }
     };
     preformQuery1();
+    setLoading(false);
   }, []);
 
   return (
-    <div>
+    <>
       <Navbar />
-      <Text mt={10} fontSize={32} textAlign="center">
-        {subject} - {year} ano
-      </Text>
+      <Skeleton isLoaded={!loading}>
+        <Text mt={10} fontSize={32} textAlign="center">
+          {subject} - {year} ano
+        </Text>
 
-      <Flex alignItems="center" justifyContent="center" mt={12}>
-        <Box maxW={350}>
-          <Input
-            borderRightRadius={0}
-            placeholder="Search Resource name"
-            onChange={(e) => {
-              setSearch(e.target.value);
-            }}
-          />
-        </Box>
-        <IconButton borderLeftRadius={0} icon={<SearchIcon />} />
-      </Flex>
-      <Flex alignItems="center" justifyContent="space-around" wrap="wrap">
-        {resourceYear.length === 0 ? (
-          <Box mt={10}>
-            <Alert
-              status="warning"
-              textAlign="center"
-              borderRadius={5}
-              size="lg"
-            >
-              <AlertIcon />
-              Ainda sem recursos aqui.
-            </Alert>
+        <Flex alignItems="center" justifyContent="center" mt={12}>
+          <Box maxW={350}>
+            <Input
+              borderRightRadius={0}
+              placeholder="Search Resource name"
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
+            />
           </Box>
-        ) : (
-          resourceYear
-            .filter((val) => {
-              if (search === "") return val;
-              else if (
-                val.name.toLowerCase().includes(search.toLocaleLowerCase())
-              ) {
-                return val;
-              }
-            })
-            .map((item, index) => {
-              return (
-                <Box key={index}>
-                  <ResourceCard
-                    author={item.author}
-                    resourceName={item.name}
-                    resourceURL={item.url}
-                  />
-                </Box>
-              );
-            })
-        )}
-      </Flex>
-    </div>
+          <IconButton borderLeftRadius={0} icon={<SearchIcon />} />
+        </Flex>
+        <Flex alignItems="center" justifyContent="space-around" wrap="wrap">
+          {resourceYear.length === 0 ? (
+            <Box mt={10}>
+              <Alert
+                status="warning"
+                textAlign="center"
+                borderRadius={5}
+                size="lg"
+              >
+                <AlertIcon />
+                Ainda sem recursos aqui.
+              </Alert>
+            </Box>
+          ) : (
+            resourceYear
+              .filter((val) => {
+                if (search === "") return val;
+                else if (
+                  val.name.toLowerCase().includes(search.toLocaleLowerCase())
+                ) {
+                  return val;
+                }
+              })
+              .map((item, index) => {
+                return (
+                  <Box key={index}>
+                    <ResourceCard
+                      author={item.author}
+                      resourceName={item.name}
+                      resourceURL={item.url}
+                    />
+                  </Box>
+                );
+              })
+          )}
+        </Flex>
+      </Skeleton>
+    </>
   );
 }
 
