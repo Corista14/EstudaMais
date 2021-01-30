@@ -9,34 +9,16 @@ import {
   Input,
   Skeleton,
   IconButton,
+  Button,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import Navbar from "../Navbar/Navbar";
 import "firebase/firestore";
-import firebase from "firebase/app";
+import usePerformFirebaseQuery from "../../helpers/queries";
 
 function Subject({ year, subject }) {
-  const db = firebase.firestore();
-  const [resourceYear, setResourceYear] = useState([]);
   const [search, setSearch] = useState("");
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const preformQuery1 = async () => {
-      setLoading(true);
-      const query = await db
-        .collection("resource")
-        .where("year", "==", year)
-        .where("subject", "==", subject)
-        .get();
-      for (const year of query.docs) {
-        const data = year.data();
-        setResourceYear((prevState) => prevState.concat(data));
-      }
-    };
-    preformQuery1();
-    setLoading(false);
-  }, []);
+  const { resource, loading, latestQuery } = usePerformFirebaseQuery(year, subject);
 
   return (
     <>
@@ -59,7 +41,7 @@ function Subject({ year, subject }) {
           <IconButton borderLeftRadius={0} icon={<SearchIcon />} />
         </Flex>
         <Flex alignItems="center" justifyContent="space-around" wrap="wrap">
-          {resourceYear.length === 0 ? (
+          {resource.length === 0 ? (
             <Box mt={10}>
               <Alert
                 status="warning"
@@ -72,7 +54,7 @@ function Subject({ year, subject }) {
               </Alert>
             </Box>
           ) : (
-            resourceYear
+            resource
               .filter((val) => {
                 if (search === "") return val;
                 else if (
@@ -94,6 +76,11 @@ function Subject({ year, subject }) {
               })
           )}
         </Flex>
+        {resource.length === 4 ? (
+          <Box textAlign="center" mt={4}>
+            <Button>Load More</Button>
+          </Box>
+        ) : null}
       </Skeleton>
     </>
   );

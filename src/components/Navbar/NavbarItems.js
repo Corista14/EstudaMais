@@ -1,6 +1,6 @@
 export const MiddleNavbarItems = [
   {
-    title: "Disciplinas",
+    title: "Subjects",
     cName: "nav-links",
     as1: 'Matemática A (11º ano)',
     as2: 'Física e Química A (11º ano)',

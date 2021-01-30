@@ -22,10 +22,10 @@ function App() {
           <PrivateRoute path="/profile" component={Profile} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={SignUp} />
-          <Route path="/mat11" component={Mat11} />
-          <Route path="/bg11" component={Bg11} />
-          <Route path="/fq11" component={Fq11} />
-          <Route path="/pt11" component={Pt11} />
+          <PrivateRoute path="/mat11" component={Mat11} />
+          <PrivateRoute path="/bg11" component={Bg11} />
+          <PrivateRoute path="/fq11" component={Fq11} />
+          <PrivateRoute path="/pt11" component={Pt11} />
           <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />
         </Switch>

@@ -84,7 +84,7 @@ function Home() {
                 fontSize={32}
                 color="whitesmoke"
               >
-                In order to share resources you need to own an account.
+                In order to share and see resources you need to own an account.
               </Text>
               <Text
                 textAlign="center"
