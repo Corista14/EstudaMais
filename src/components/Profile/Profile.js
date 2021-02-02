@@ -203,7 +203,7 @@ function Profile() {
             {dbResCount}
           </Text>
         </Box>
-        <Box textAlign="center" mt={10}>
+        <Box textAlign="center">
           <Text className="title-stats" fontSize="2rem">
             Criation Date
           </Text>
