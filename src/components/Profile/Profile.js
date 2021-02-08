@@ -203,7 +203,7 @@ function Profile() {
             {dbResCount}
           </Text>
         </Box>
-        <Box textAlign="center">
+        <Box textAlign="center" mt={20}>
           <Text className="title-stats" fontSize="2rem">
             Criation Date
           </Text>
@@ -270,7 +270,7 @@ function Profile() {
                   </FormControl>
 
                   <FormControl mt={5}>
-                    <FormLabel>Seleciona the File</FormLabel>
+                    <FormLabel>Select the File</FormLabel>
                     <Input
                       display="none"
                       type="file"
