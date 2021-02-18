@@ -8,6 +8,8 @@ import Profile from "./components/Profile/Profile";
 import SearchProfile from "./components/SearchProfile/SearchProfile";
 import SignUp from "./components/SignUp/SignUp";
 import Bg11 from "./components/Subjects/_11/Bg11";
+import Ef from "./components/Subjects/_11/Ef";
+import Fil11 from "./components/Subjects/_11/Fil11";
 import Fq11 from "./components/Subjects/_11/Fq11";
 import Mat11 from "./components/Subjects/_11/Mat11";
 import Pt11 from "./components/Subjects/_11/Pt11";
@@ -27,6 +29,8 @@ function App() {
           <PrivateRoute path="/bg11" component={Bg11} />
           <PrivateRoute path="/fq11" component={Fq11} />
           <PrivateRoute path="/pt11" component={Pt11} />
+          <PrivateRoute path="/filosofia11" component={Fil11} />
+          <PrivateRoute path="/ef" component={Ef} />
           <PrivateRoute path="/search-profile" component={SearchProfile} />
           <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />

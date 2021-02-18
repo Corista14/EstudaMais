@@ -25,7 +25,7 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const { signup } = useAuth();
+  const { signup, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -47,6 +47,7 @@ function SignUp() {
   function handleUsernameChange(e) {
     setUsername(e.target.value);
   }
+
 
   async function handleSubmit(e) {
     e.preventDefault();

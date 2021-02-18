@@ -6,6 +6,8 @@ export const MiddleNavbarItems = [
     as2: 'Física e Química A (11º ano)',
     as3: 'Biologia e Geologia (11º ano)',
     as4: 'Português (11º ano)',
+    as5: 'Filosofia (11º ano)',
+    as6: 'Educação Física',
   },
 ];
 

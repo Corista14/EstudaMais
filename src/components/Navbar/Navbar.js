@@ -144,6 +144,14 @@ function Navbar(props) {
                       <ChakraLink to="/pt11">
                         <MenuItem>{item.as4}</MenuItem> {/*  PT  */}
                       </ChakraLink>
+
+                      <ChakraLink to="/filosofia11">
+                        <MenuItem>{item.as5}</MenuItem> {/*  PT  */}
+                      </ChakraLink>
+
+                      <ChakraLink to="/ef">
+                        <MenuItem>{item.as6}</MenuItem>
+                      </ChakraLink>
                     </MenuList>
                   </Menu>
                 </Flex>
@@ -272,6 +280,14 @@ function Navbar(props) {
 
                               <ChakraLink to="/pt11">
                                 <MenuItem>{item.as4}</MenuItem>
+                              </ChakraLink>
+
+                              <ChakraLink to="/filosofia11">
+                                <MenuItem>{item.as5}</MenuItem>
+                              </ChakraLink>
+
+                              <ChakraLink to="/ef">
+                                <MenuItem>{item.as6}</MenuItem>
                               </ChakraLink>
                             </MenuList>
                           </Menu>

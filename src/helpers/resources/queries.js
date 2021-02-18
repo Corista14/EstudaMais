@@ -20,14 +20,14 @@ function usePerformFirebaseQuery(year, subject, limit) {
         const data = year.data();
         setResource((prevState) => prevState.concat(data));
       }
-      
     };
     performQuery();
     setLoading(false);
   }, []);
 
-  
-
   return { resource, loading };
 }
-export default usePerformFirebaseQuery;
+
+
+
+export default usePerformFirebaseQuery

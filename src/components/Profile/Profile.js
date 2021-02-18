@@ -266,6 +266,8 @@ function Profile() {
                       </option>
                       <option value="Biologia">Biologia</option>
                       <option value="Português">Português</option>
+                      <option value="Filosofia">Filosofia</option>
+                      <option value="Educação Física">Educação Física</option>
                     </Select>
                   </FormControl>
 

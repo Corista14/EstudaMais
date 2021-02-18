@@ -10,15 +10,15 @@ function ResourceCard({ resourceName, author, resourceURL }) {
       w={300}
       borderWidth={1}
       boxShadow="2xl"
-      padding={7}
+      padding={5}
       mb={10}
       mr={12}
       ml={12}
     >
-      <Text color="blue.500" fontSize={28} fontWeight="bold" textAlign="center">
+      <Text color="blue.500" fontSize={26} fontWeight="bold" textAlign="center">
         {author}
       </Text>
-      <Text mt={7} fontSize={22} textAlign="center">
+      <Text mt={7} fontSize={20} textAlign="center">
         {resourceName}
       </Text>
       <Box textAlign="center" mt={7}>
@@ -29,7 +29,9 @@ function ResourceCard({ resourceName, author, resourceURL }) {
           rel="noopener noreferrer"
           href={resourceURL}
           colorScheme="blue"
-          rightIcon={<DownloadIcon fontSize="18px"/>}
+          fontSize="20px"
+          variant="ghost"
+          rightIcon={<DownloadIcon fontSize="20px"/>}
         >
           Download
         </Button>

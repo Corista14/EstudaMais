@@ -14,7 +14,7 @@ import {
 import { SearchIcon } from "@chakra-ui/icons";
 import Navbar from "../Navbar/Navbar";
 import "firebase/firestore";
-import usePerformFirebaseQuery from "../../helpers/queries";
+import usePerformFirebaseQuery from "../../helpers/resources/queries";
 
 function Subject({ year, subject }) {
   const [search, setSearch] = useState("");

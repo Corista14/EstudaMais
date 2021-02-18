@@ -22,11 +22,11 @@ export function AuthProvider({ children }) {
           username: username,
           email: email,
           userResourcesCount: 0,
-          level: 1
+          level: 1,
+          progress: 0,
         });
       });
   }
-
   function login(email, password) {
     return auth.signInWithEmailAndPassword(email, password);
   }
