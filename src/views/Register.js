@@ -55,7 +55,7 @@ function Register() {
 
       history.push("/");
     } catch (error) {
-      console.log(error.message);
+      setError(error.message)
     }
 
     setLoading(false);
